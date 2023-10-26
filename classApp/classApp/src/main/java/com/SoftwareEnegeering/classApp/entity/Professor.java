@@ -1,36 +1,29 @@
 package com.SoftwareEnegeering.classApp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Table
 public class Professor {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer prof_id;
+    private String prof_nome;
 
+    @ManyToOne
+    @JoinColumn(name = "disc_id")
+    private Disciplina prof_disciplina;
 
-    private String Nome;
-    private String Email;
-    private String registro;
-    private boolean ativo = true;
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
+    @ManyToMany(mappedBy = "turma_professores")
+    private Set<Turma> prof_turmas;
 }

@@ -1,26 +1,26 @@
 package com.SoftwareEnegeering.classApp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Table
 public class Disciplina {
     @Id
-    @GeneratedValue(generator = "UUID")
-    private UUID id;
-    private String nome;
-    private String codigo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer disc_id;
+    private String disc_nome;
+
+    @OneToMany(mappedBy = "prof_disciplina")
+    private Set<Professor> disc_professores;
+
+
 }
