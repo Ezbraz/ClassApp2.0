@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,13 +18,13 @@ public class Professor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer prof_id;
-    private String prof_nome;
+    private Integer id;
+    private String nome;
 
     @ManyToOne
     @JoinColumn(name = "disc_id")
     private Disciplina prof_disciplina;
 
     @ManyToMany(mappedBy = "turma_professores")
-    private Set<Turma> prof_turmas;
+    private List<Turma> turmas;
 }

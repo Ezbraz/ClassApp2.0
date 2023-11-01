@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,11 @@ import java.util.Set;
 public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer disc_id;
-    private String disc_nome;
+    private Integer id;
+    private String nome;
 
     @OneToMany(mappedBy = "prof_disciplina")
-    private Set<Professor> disc_professores;
+    private List<Professor> professores;
 
 
 }
