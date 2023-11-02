@@ -1,5 +1,6 @@
 package com.SoftwareEnegeering.classApp.service;
 
+import com.SoftwareEnegeering.classApp.dto.aluno.AlunoNome;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoRequest;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoResponse;
 import com.SoftwareEnegeering.classApp.entity.Aluno;
@@ -7,9 +8,11 @@ import com.SoftwareEnegeering.classApp.entity.Aluno;
 import java.util.List;
 
 public interface AlunoService {
-    Aluno createAluno(Aluno aluno);
+    AlunoResponse createAluno(AlunoRequest dto);
 
-    List<Aluno> getAlunos();
+    List<AlunoResponse> getAlunos();
+
+    List<AlunoNome> getNomesAlunos();
 
     AlunoResponse updateAluno(Integer id, AlunoRequest dto);
 

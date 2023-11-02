@@ -1,11 +1,16 @@
 package com.SoftwareEnegeering.classApp.service;
 
-import com.SoftwareEnegeering.classApp.entity.Turma;
+import com.SoftwareEnegeering.classApp.dto.turma.TurmaRequest;
+import com.SoftwareEnegeering.classApp.dto.turma.TurmaResponse;
 
 import java.util.List;
 
 public interface TurmaService {
-    Turma createTurma(Turma turma);
+    TurmaResponse createTurma(TurmaRequest turma);
 
-    List<Turma> getTurmas();
+    List<TurmaResponse> getTurmas();
+
+    TurmaResponse updateTurma(Integer id, TurmaRequest dto);
+
+    void deleteTurma(Integer id);
 }

@@ -1,8 +1,8 @@
 package com.SoftwareEnegeering.classApp.service;
 
+import com.SoftwareEnegeering.classApp.dto.aluno.AlunoNome;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoRequest;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoResponse;
-import com.SoftwareEnegeering.classApp.dto.disciplina.DisciplinaResponse;
 import com.SoftwareEnegeering.classApp.entity.Aluno;
 import com.SoftwareEnegeering.classApp.entity.Turma;
 import com.SoftwareEnegeering.classApp.exceptions.NotFoundException;
@@ -11,6 +11,7 @@ import com.SoftwareEnegeering.classApp.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +24,35 @@ public class AlunoServiceImp implements AlunoService{
     private TurmaRepository turmaRepository;
 
     @Override
-    public Aluno createAluno(Aluno aluno) {
-        return alunoRepository.save(aluno);
+    public AlunoResponse createAluno(AlunoRequest dto) {
+        Aluno aluno = new Aluno();
+        aluno.setNome(dto.getNome());
+        aluno.setNascimento(dto.getNascimento());
+        Optional<Turma> turmaOptional = turmaRepository.findById(dto.getTurmaId());
+
+        if (turmaOptional.isPresent()) {
+            aluno.setTurma(turmaOptional.get());
+        } else throw new NotFoundException();
+        alunoRepository.save(aluno);
+        AlunoResponse alunoResponse = new AlunoResponse(aluno);
+        return alunoResponse;
     }
 
     @Override
-    public List<Aluno> getAlunos() {
-        return alunoRepository.findAll();
+    public List<AlunoResponse> getAlunos() {
+        List<Aluno> alunos = alunoRepository.findAll();
+        List<AlunoResponse> alunoResponses = new ArrayList<>();
+
+        for (Aluno aluno : alunos) {
+            AlunoResponse alunoDTO = new AlunoResponse(aluno);
+            alunoResponses.add(alunoDTO);
+        }
+        return alunoResponses;
+    }
+
+    @Override
+    public List<AlunoNome> getNomesAlunos() {
+        return alunoRepository.findNamesAndIds();
     }
 
     @Override
@@ -38,8 +61,12 @@ public class AlunoServiceImp implements AlunoService{
 
         if (alunoOptional.isPresent()) {
             Aluno aluno = alunoOptional.get();
-            aluno.setNome(dto.getNome());
-            aluno.setNascimento(dto.getNascimento());
+            if (dto.getNome() != null) {
+                aluno.setNome(dto.getNome());
+            }
+            if (dto.getNascimento() != null) {
+                aluno.setNascimento(dto.getNascimento());
+            }
             if (dto.getTurmaId() != null) {
                 Optional<Turma> turmaOptional = turmaRepository.findById(dto.getTurmaId());
 

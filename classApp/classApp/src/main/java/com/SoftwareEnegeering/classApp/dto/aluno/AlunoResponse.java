@@ -19,14 +19,14 @@ public class AlunoResponse {
     private Integer id;
     private String nome;
     private Date nascimento;
-    private Turma turma;
+    private Integer turmaId;
     private LocalDateTime CreatedAt;
 
     public AlunoResponse(Aluno entity) {
         this.id = entity.getId();
         this.nome = entity.getNome();
         this.nascimento = entity.getNascimento();
-        this.turma = entity.getTurma();
+        this.turmaId = (entity.getTurma() != null) ? entity.getTurma().getId() : null;
         CreatedAt = entity.getCreatedAt();
     }
 }

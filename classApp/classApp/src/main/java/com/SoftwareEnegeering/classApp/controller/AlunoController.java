@@ -1,5 +1,6 @@
 package com.SoftwareEnegeering.classApp.controller;
 
+import com.SoftwareEnegeering.classApp.dto.aluno.AlunoNome;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoRequest;
 import com.SoftwareEnegeering.classApp.dto.aluno.AlunoResponse;
 import com.SoftwareEnegeering.classApp.entity.Aluno;
@@ -18,17 +19,22 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @PostMapping
-    public Aluno createAluno(@RequestBody Aluno aluno){
-        return alunoService.createAluno(aluno);
+    public ResponseEntity<AlunoResponse> createAluno(@RequestBody AlunoRequest aluno){
+        return ResponseEntity.status(201).body(alunoService.createAluno(aluno));
     }
 
     @GetMapping
-    public List<Aluno> getAlunos(){
+    public List<AlunoResponse> getAlunos(){
         return alunoService.getAlunos();
     }
 
+    @GetMapping(value = "/nomes")
+    public ResponseEntity<List<AlunoNome>> getNomesAlunos() {
+        return ResponseEntity.ok().body(alunoService.getNomesAlunos());
+    }
+
     @PutMapping(value = "/{id}")
-    private ResponseEntity<AlunoResponse> updateDisciplina(@PathVariable Integer id, @RequestBody AlunoRequest dto) {
+    private ResponseEntity<AlunoResponse> updateAluno(@PathVariable Integer id, @RequestBody AlunoRequest dto) {
         AlunoResponse aluno = alunoService.updateAluno(id, dto);
         return ResponseEntity.ok().body(aluno);
     }
