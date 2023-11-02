@@ -23,7 +23,7 @@ public class Professor {
 
     @ManyToOne
     @JoinColumn(name = "disc_id")
-    private Disciplina prof_disciplina;
+    private Disciplina disciplina;
 
     @ManyToMany(mappedBy = "turma_professores")
     private List<Turma> turmas;

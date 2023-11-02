@@ -1,5 +1,6 @@
 package com.SoftwareEnegeering.classApp.dto.disciplina;
 
+import com.SoftwareEnegeering.classApp.dto.professor.ProfessorDisciplinaResponse;
 import com.SoftwareEnegeering.classApp.dto.professor.ProfessorResponse;
 import com.SoftwareEnegeering.classApp.entity.Disciplina;
 import lombok.AllArgsConstructor;
@@ -20,13 +21,13 @@ public class DisciplinaResponse {
 
     private String nome;
 
-    private List<ProfessorResponse> professores;
+    private List<ProfessorDisciplinaResponse> professores;
 
     public DisciplinaResponse(Disciplina entity) {
         id = entity.getId();
         nome = entity.getNome();
-        professores = new ArrayList<ProfessorResponse>();
-        entity.getProfessores().forEach(professor -> professores.add(new ProfessorResponse(professor)));
+        professores = new ArrayList<>();
+        entity.getProfessores().forEach(professor -> professores.add(new ProfessorDisciplinaResponse(professor)));
     }
 
 }

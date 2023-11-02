@@ -20,7 +20,7 @@ public class Disciplina {
     private Integer id;
     private String nome;
 
-    @OneToMany(mappedBy = "prof_disciplina")
+    @OneToMany(mappedBy = "disciplina")
     private List<Professor> professores;
 
 

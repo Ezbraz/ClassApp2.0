@@ -1,11 +1,17 @@
 package com.SoftwareEnegeering.classApp.service;
 
-import com.SoftwareEnegeering.classApp.entity.Professor;
+import com.SoftwareEnegeering.classApp.dto.professor.ProfessorNome;
+import com.SoftwareEnegeering.classApp.dto.professor.ProfessorRequest;
+import com.SoftwareEnegeering.classApp.dto.professor.ProfessorResponse;
 
 import java.util.List;
 
 public interface ProfessorService {
-    Professor createProfessor(Professor professor);
+    ProfessorResponse createProfessor(ProfessorRequest professor);
 
-    List<Professor> getAllProfessores();
+    List<ProfessorResponse> getAllProfessores();
+
+    void deleteProfessor(Integer id);
+
+    List<ProfessorNome> getNomesProfessores();
 }

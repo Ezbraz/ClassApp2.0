@@ -9,7 +9,9 @@ import com.SoftwareEnegeering.classApp.exceptions.NotFoundException;
 import com.SoftwareEnegeering.classApp.repository.AlunoRepository;
 import com.SoftwareEnegeering.classApp.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,8 @@ public class AlunoServiceImp implements AlunoService{
 
         if (turmaOptional.isPresent()) {
             aluno.setTurma(turmaOptional.get());
-        } else throw new NotFoundException();
+        } else throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST, "Id da Turma não existe");
         alunoRepository.save(aluno);
         AlunoResponse alunoResponse = new AlunoResponse(aluno);
         return alunoResponse;
