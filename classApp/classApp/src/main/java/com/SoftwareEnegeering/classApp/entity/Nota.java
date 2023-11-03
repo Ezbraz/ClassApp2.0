@@ -2,26 +2,31 @@ package com.SoftwareEnegeering.classApp.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class AlunoDisciplina {
+@AllArgsConstructor
+@Builder
+public class Nota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "aluno_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne
     private Aluno aluno;
 
     @ManyToOne
-    @JoinColumn(name = "disciplina_id", referencedColumnName = "id", nullable = false)
     private Disciplina disciplina;
 
-    private Double nota;
+    private Double pontuacao;
+
+    @CreationTimestamp
+    private LocalDateTime CreatedAt;
 
 }
