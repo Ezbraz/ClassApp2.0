@@ -21,6 +21,7 @@ public class DisciplinaServiceImp implements DisciplinaService{
     public DisciplinaResponse createDisciplina(DisciplinaRequest dto) {
         Disciplina disciplina = new Disciplina();
         disciplina.setNome(dto.getNome());
+        disciplinaRepository.save(disciplina);
         return new DisciplinaResponse(disciplina);
     }
     @Override
