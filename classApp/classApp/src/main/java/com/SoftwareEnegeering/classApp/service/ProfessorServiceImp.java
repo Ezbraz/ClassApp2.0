@@ -50,6 +50,8 @@ public class ProfessorServiceImp implements ProfessorService{
                 } else throw new ResponseStatusException(
                         HttpStatus.BAD_REQUEST, "Id " + turmaId + " da Turma não existe");
             });
+            turmaRepository.saveAll(turmas);
+            turmas.forEach(turma -> turma.getTurma_professores().add(professor));
             professor.setTurmas(turmas);
         }
         professorRepository.save(professor);

@@ -24,6 +24,6 @@ public class Professor {
     @JoinColumn(name = "disc_id")
     private Disciplina disciplina;
 
-    @ManyToMany(mappedBy = "turma_professores")
+    @ManyToMany(mappedBy = "turma_professores", cascade = CascadeType.ALL)
     private List<Turma> turmas;
 }

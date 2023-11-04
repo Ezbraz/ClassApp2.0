@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -30,6 +29,6 @@ public class Turma {
     @JoinTable(name = "turma_professores",
     joinColumns = @JoinColumn (name = "turma_id"),
     inverseJoinColumns = @JoinColumn(name = "prof_id"))
-    private Set<Professor> turma_professores;
+    private List<Professor> turma_professores;
 
 }
