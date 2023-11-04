@@ -7,9 +7,9 @@ import com.SoftwareEnegeering.classApp.entity.Disciplina;
 import java.util.List;
 
 public interface DisciplinaService {
-    Disciplina createDisciplina(Disciplina disciplina);
+    DisciplinaResponse createDisciplina(DisciplinaRequest disciplina);
 
-    List<Disciplina> getAllDisciplinas();
+    List<DisciplinaResponse> getAllDisciplinas();
 
     DisciplinaResponse update(Integer id, DisciplinaRequest dto);
 

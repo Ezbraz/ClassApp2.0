@@ -1,10 +1,7 @@
 package com.SoftwareEnegeering.classApp.controller;
 
-import com.SoftwareEnegeering.classApp.dto.aluno.AlunoRequest;
-import com.SoftwareEnegeering.classApp.dto.aluno.AlunoResponse;
 import com.SoftwareEnegeering.classApp.dto.turma.TurmaRequest;
 import com.SoftwareEnegeering.classApp.dto.turma.TurmaResponse;
-import com.SoftwareEnegeering.classApp.entity.Turma;
 import com.SoftwareEnegeering.classApp.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

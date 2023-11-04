@@ -2,6 +2,7 @@ package com.SoftwareEnegeering.classApp.service;
 
 import com.SoftwareEnegeering.classApp.dto.nota.NotaRequest;
 import com.SoftwareEnegeering.classApp.dto.nota.NotaResponse;
+import com.SoftwareEnegeering.classApp.dto.nota.NotaUpdateRequest;
 import com.SoftwareEnegeering.classApp.entity.Aluno;
 import com.SoftwareEnegeering.classApp.entity.Disciplina;
 import com.SoftwareEnegeering.classApp.entity.Nota;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NotaServiceImp  implements NotaService{
+public class NotaServiceImp  implements NotaService {
 
     @Autowired
     private NotaRepository notaRepository;
@@ -58,13 +59,10 @@ public class NotaServiceImp  implements NotaService{
         return new NotaResponse(nota);
     }
 
-    public NotaResponse updateNota(Integer id, NotaRequest dto) {
+    public NotaResponse updateNota(Integer id, NotaUpdateRequest dto) {
         Optional<Nota> notaOptional = notaRepository.findById(id);
 
         if (notaOptional.isPresent()) {
-            if(dto.getAlunoId() != null || dto.getDisciplinaId() != null) throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Só é possivel alterar o valor da nota");
-
             Nota nota = notaOptional.get();
             nota.setPontuacao(dto.getPontuacao());
             notaRepository.save(nota);

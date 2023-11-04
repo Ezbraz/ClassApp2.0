@@ -1,29 +1,27 @@
 package com.SoftwareEnegeering.classApp.dto.professor;
 
-import com.SoftwareEnegeering.classApp.dto.disciplina.DisciplinaNome;
-import com.SoftwareEnegeering.classApp.entity.Aluno;
-import com.SoftwareEnegeering.classApp.entity.Disciplina;
+import com.SoftwareEnegeering.classApp.dto.disciplina.DisciplinaResponse;
 import com.SoftwareEnegeering.classApp.entity.Professor;
 import com.SoftwareEnegeering.classApp.entity.Turma;
-import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
+@Data
 public class ProfessorResponse {
 
     private Integer id;
     private String nome;
 
-    private DisciplinaNome disciplina;
+    private DisciplinaResponse disciplina;
 
     private List<Integer> turmasIds;
 
     public ProfessorResponse(Professor entity) {
         this.id = entity.getId();
         this.nome = entity.getNome();
-        this.disciplina = new DisciplinaNome(entity.getDisciplina());
+        this.disciplina = new DisciplinaResponse(entity.getDisciplina());
         this.turmasIds = mapTurmasIds(entity.getTurmas());
     }
 

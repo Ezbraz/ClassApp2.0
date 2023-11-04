@@ -2,9 +2,7 @@ package com.SoftwareEnegeering.classApp.controller;
 
 import com.SoftwareEnegeering.classApp.dto.disciplina.DisciplinaRequest;
 import com.SoftwareEnegeering.classApp.dto.disciplina.DisciplinaResponse;
-import com.SoftwareEnegeering.classApp.entity.Disciplina;
 import com.SoftwareEnegeering.classApp.service.DisciplinaService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +17,11 @@ public class DisciplinaController {
     private DisciplinaService disc_service;
 
     @PostMapping
-    private Disciplina createDisciplina(@RequestBody Disciplina disciplina){
+    private DisciplinaResponse createDisciplina(@RequestBody DisciplinaRequest disciplina){
         return disc_service.createDisciplina(disciplina);
     }
     @GetMapping
-    private List<Disciplina> getAllDisciplinas(){
+    private List<DisciplinaResponse> getAllDisciplinas(){
         return disc_service.getAllDisciplinas();
     }
 

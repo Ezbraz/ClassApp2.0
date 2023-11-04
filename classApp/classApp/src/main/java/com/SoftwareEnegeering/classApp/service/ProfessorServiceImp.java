@@ -41,10 +41,20 @@ public class ProfessorServiceImp implements ProfessorService{
                     HttpStatus.BAD_REQUEST, "Id da Disciplina não existe");
         }
         professor.setNome(dto.getNome());
-        List<Turma> turmas = turmaRepository.findAllById(dto.getTurmasIds());
-        professor.setTurmas(turmas);
+        if(dto.getTurmasIds() != null && !dto.getTurmasIds().isEmpty()) {
+            List<Turma> turmas = new ArrayList<>();
+            dto.getTurmasIds().forEach(turmaId -> {
+                Optional<Turma> turmaOptional = turmaRepository.findById(turmaId);
+                if (turmaOptional.isPresent()) {
+                    turmas.add(turmaOptional.get());
+                } else throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Id " + turmaId + " da Turma não existe");
+            });
+            professor.setTurmas(turmas);
+        }
         professorRepository.save(professor);
-        return new ProfessorResponse(professor);
+        ProfessorResponse professorResponse = new ProfessorResponse(professor);
+        return professorResponse;
     }
 
     @Override
@@ -61,6 +71,38 @@ public class ProfessorServiceImp implements ProfessorService{
 
     public List<ProfessorNome> getNomesProfessores() {
         return professorRepository.findNamesAndIds();
+    }
+
+    @Override
+    public ProfessorResponse updateProfessor(Integer id, ProfessorRequest dto) {
+        Optional<Professor> professorOptional = professorRepository.findById(id);
+        if(professorOptional.isPresent()) {
+            Professor professor = professorOptional.get();
+            if(dto.getNome() != null) {
+                professor.setNome(dto.getNome());
+            }
+            if(dto.getDisciplinaId() != null) {
+                Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(dto.getDisciplinaId());
+                if (disciplinaOptional.isPresent()) {
+                    professor.setDisciplina(disciplinaOptional.get());
+                } else throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST, "Id da Disciplina não existe");
+            }
+            if(dto.getTurmasIds() != null && !dto.getTurmasIds().isEmpty()) {
+                List<Turma> turmas = new ArrayList<>();
+                dto.getTurmasIds().forEach(turmaId -> {
+                    Optional<Turma> turmaOptional = turmaRepository.findById(turmaId);
+                    if (turmaOptional.isPresent()) {
+                        turmas.add(turmaOptional.get());
+                    } else throw new ResponseStatusException(
+                            HttpStatus.BAD_REQUEST, "Id " + turmaId + " da Turma não existe");
+                });
+                professor.setTurmas(turmas);
+            }
+            professorRepository.save(professor);
+            ProfessorResponse professorResponse = new ProfessorResponse(professor);
+            return professorResponse;
+        }else throw new NotFoundException();
     }
 
     @Override

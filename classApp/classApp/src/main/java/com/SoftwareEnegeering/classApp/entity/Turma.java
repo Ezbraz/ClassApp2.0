@@ -19,9 +19,9 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nome; //ex:3B (terceiro ano b)
-    private Integer nivel; //serie. ex: 3 (TERCEIRO ANO)
-    private Integer ano; //ex: 2020
+    private String nome;
+    private Integer nivel;
+    private Integer ano;
 
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;

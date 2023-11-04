@@ -2,6 +2,7 @@ package com.SoftwareEnegeering.classApp.controller;
 
 import com.SoftwareEnegeering.classApp.dto.nota.NotaRequest;
 import com.SoftwareEnegeering.classApp.dto.nota.NotaResponse;
+import com.SoftwareEnegeering.classApp.dto.nota.NotaUpdateRequest;
 import com.SoftwareEnegeering.classApp.service.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class NotaController {
     }
 
     @PutMapping("/{id}")
-    public NotaResponse atualizarNota(@PathVariable Integer id, @RequestBody NotaRequest nota) {
+    public NotaResponse atualizarNota(@PathVariable Integer id, @RequestBody NotaUpdateRequest nota) {
         return notaService.updateNota(id, nota);
     }
 

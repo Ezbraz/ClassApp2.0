@@ -14,4 +14,6 @@ public interface ProfessorService {
     void deleteProfessor(Integer id);
 
     List<ProfessorNome> getNomesProfessores();
+
+    ProfessorResponse updateProfessor(Integer id, ProfessorRequest dto);
 }

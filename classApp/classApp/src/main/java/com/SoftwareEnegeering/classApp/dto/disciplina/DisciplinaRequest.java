@@ -17,6 +17,6 @@ public class DisciplinaRequest {
     @NotBlank(message = "Nome is required")
     private String nome;
 
-    private List<Integer> professores;
+    private List<Integer> professoresIds;
 
 }

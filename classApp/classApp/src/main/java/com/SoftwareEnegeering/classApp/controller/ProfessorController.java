@@ -1,10 +1,8 @@
 package com.SoftwareEnegeering.classApp.controller;
 
-import com.SoftwareEnegeering.classApp.dto.aluno.AlunoNome;
 import com.SoftwareEnegeering.classApp.dto.professor.ProfessorNome;
 import com.SoftwareEnegeering.classApp.dto.professor.ProfessorRequest;
 import com.SoftwareEnegeering.classApp.dto.professor.ProfessorResponse;
-import com.SoftwareEnegeering.classApp.entity.Professor;
 import com.SoftwareEnegeering.classApp.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +29,12 @@ public class ProfessorController {
     @GetMapping(value = "/nomes")
     public ResponseEntity<List<ProfessorNome>> getNomesProfessores() {
         return ResponseEntity.ok().body(professorService.getNomesProfessores());
+    }
+
+    @PutMapping(value = "/{id}")
+    private ResponseEntity<ProfessorResponse> updateProfessor(@PathVariable Integer id, @RequestBody ProfessorRequest dto) {
+        ProfessorResponse professor = professorService.updateProfessor(id, dto);
+        return ResponseEntity.ok().body(professor);
     }
 
     @DeleteMapping(value = "/{id}")
