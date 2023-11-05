@@ -29,6 +29,7 @@ public class AlunoServiceImp implements AlunoService{
     public AlunoResponse createAluno(AlunoRequest dto) {
         Aluno aluno = new Aluno();
         aluno.setNome(dto.getNome());
+        aluno.setSexo(dto.getSexo());
         aluno.setNascimento(dto.getNascimento());
         Optional<Turma> turmaOptional = turmaRepository.findById(dto.getTurmaId());
 
@@ -69,6 +70,9 @@ public class AlunoServiceImp implements AlunoService{
             }
             if (dto.getNascimento() != null) {
                 aluno.setNascimento(dto.getNascimento());
+            }
+            if (dto.getSexo() != null) {
+                aluno.setSexo(dto.getSexo());
             }
             if (dto.getTurmaId() != null) {
                 Optional<Turma> turmaOptional = turmaRepository.findById(dto.getTurmaId());

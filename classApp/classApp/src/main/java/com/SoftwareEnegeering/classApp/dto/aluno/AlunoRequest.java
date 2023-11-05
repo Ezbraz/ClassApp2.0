@@ -15,6 +15,8 @@ public class AlunoRequest {
     @NotBlank(message = "Nascimento is required")
     private Date nascimento;
 
+    private String sexo;
+
     @NotNull(message = "Nome is required")
     private Integer turmaId;
 }

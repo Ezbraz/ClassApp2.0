@@ -18,6 +18,7 @@ public class AlunoResponse {
 
     private Integer id;
     private String nome;
+    private String sexo;
     private Date nascimento;
     private Integer turmaId;
     private LocalDateTime CreatedAt;
@@ -26,6 +27,7 @@ public class AlunoResponse {
         this.id = entity.getId();
         this.nome = entity.getNome();
         this.nascimento = entity.getNascimento();
+        this.sexo = entity.getSexo();
         this.turmaId = (entity.getTurma() != null) ? entity.getTurma().getId() : null;
         CreatedAt = entity.getCreatedAt();
     }

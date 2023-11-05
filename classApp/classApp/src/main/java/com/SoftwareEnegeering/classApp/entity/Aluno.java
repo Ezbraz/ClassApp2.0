@@ -22,6 +22,8 @@ public class Aluno {
     private String nome;
     private Date nascimento;
 
+    private String sexo;
+
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
